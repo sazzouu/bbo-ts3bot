@@ -4,7 +4,7 @@ import json
 with open("./config.json", "r") as file:
     config = json.load(file)
 
-    bot = Client(config['query_name'], config['query_password'])
+    bot = Client(config['query_name'], config['query_password'], config['query_address'], config['query_port'])
     bot.setName(config['bot_name'])
     bot.globalMessage(config['bot_join_message'])
     if config['server_settings_override']:

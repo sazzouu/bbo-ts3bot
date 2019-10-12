@@ -1,9 +1,9 @@
 from Socket import Telnet
 
 class Bot:
-    def __init__(self, name, password):
+    def __init__(self, name, password, ip="localhost", port=10011):
         print("Setting up TS3-Bot...")
-        self.client = Telnet()
+        self.client = Telnet(ip, port)
         self.client.connect()
         self.connected = False
         self.ccount = 0

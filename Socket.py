@@ -1,7 +1,7 @@
 import telnetlib
 
 class Telnet:
-    def __init__(self, ip="127.0.0.1", port=10011):
+    def __init__(self, ip, port):
         print("Initializing Telnet-Socket with {0} as remote and {1} as destination...".format(ip, port))
         self.host = ip
         self.port = port
