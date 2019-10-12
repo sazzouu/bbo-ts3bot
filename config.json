@@ -1,18 +1,18 @@
 {
-  "query_name": "#MOST LIKELY serveradmin#",
-  "query_password": "#PASSWORD#",
+  "query_name": "serveradmin",
+  "query_password": "kqkpPp0j",
   "server_settings_override": false,
   "server_settings":{
     "virtualserver_name": "Burtzelbude Oberfranken",
-    "virtualserver_maxclients": 64
+    "virtualserver_maxclients": 32
   },
   "bot_name": "[BBO] Query Bot",
   "bot_join_message": "BBO-Bot in da house!",
   "use_afk": true,
   "afk_cid": 2,
-  "max_idle_time": 1800000,
+  "max_idle_time": 5000,
   "afk_move_message": "You have been AFK for too long!",
   "use_online_spacer": true,
   "online_spacer_cid": 1,
-  "online_spacer_label": "[cspacer]- {0} User(s) online"
+  "online_spacer_label": "[cspacer] {0} User(s) online"
 }
