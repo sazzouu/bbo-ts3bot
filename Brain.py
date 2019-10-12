@@ -127,22 +127,8 @@ class Bot:
         self.client.write("channeledit cid=" + str(cid) + params)
 
     def clientCount(self):
-        response = self.client.write("clientlist -uid")
-        if response != None:
-            count = 0
-            response = response.split("|")
-            for clientstring in response:
-                client = clientstring.split(" ")
-                for i in range(0,len(client)):
-                    temp = client[i].split("=")
-                    if temp[0] == "client_database_id":
-                        if int(temp[1]) != 1:
-                            count += 1
-                            break
-            return count
-        else:
-            print("No clients found! Are you connected?")
-            return None
+        response = self.serverInfo()
+        return int(response['virtualserver_clientsonline'])
 
     def clientCountChanged(self):
         cur_count = self.clientCount()
