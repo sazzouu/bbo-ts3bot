@@ -27,7 +27,7 @@ with open("./config.json", "r") as file:
                 afk_ids = None
                 for afk in afks:
                     if int(afk['client_database_id']) != 1:
-                        if(int(afk['cid']) != config['afk_cid']):
+                        if(int(afk['cid']) != config['afk_cid'] and not int(afk['cid']) in config['afk_immune_cids']):
                             if int(afk['client_idle_time']) > config['max_idle_time']:
                                 if afk_ids == None:
                                     afk_ids = ""
