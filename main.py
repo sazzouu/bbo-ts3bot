@@ -24,11 +24,19 @@ with open("./config.json", "r") as file:
         else:
             if config['use_afk']:
                 afks = bot.afkClients()
+                afk_ids = None
                 for afk in afks:
                     if int(afk['client_database_id']) != 1:
                         if(int(afk['cid']) != config['afk_cid']):
                             if int(afk['client_idle_time']) > config['max_idle_time']:
-                                bot.clientMove(afk['clid'], config['afk_cid'], config['afk_move_message'])
+                                if afk_ids == None:
+                                    afk_ids = ""
+
+                                afk_ids += "clid=" + afk['clid'] + "|"
+
+                if afk_ids != None:
+                    afk_ids = afk_ids[:-1]
+                    bot.clientMove(afk_ids, config['afk_cid'], config['afk_move_message'])
 
             if config['use_online_spacer']:
                 if bot.clientCountChanged():
@@ -36,5 +44,3 @@ with open("./config.json", "r") as file:
                         'channel_name': config['online_spacer_label'].format(bot.ccount),
                     }
                     bot.editChannel(config['online_spacer_cid'], cfg)
-
-            #bot.commandHelp("serveredit")

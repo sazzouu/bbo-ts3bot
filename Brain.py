@@ -89,16 +89,21 @@ class Bot:
 
     def clientMove(self, clid, cid, reason=None):
         print("Moving client with ID {0} to channel {1}...\nReason: {2}".format(clid, cid, reason))
-        response = self.client.write("clientmove clid=" + str(clid) + " cid=" + str(cid))
+        response = self.client.write("clientmove " + str(clid) + " cid=" + str(cid))
         if response != None:
             print("Done!")
             if(reason != None):
-                self.clientPoke(clid, reason)
+                clids = str(clid).split("|")
+                if len(clids) > 1:
+                    for clid in clids:
+                        self.clientPoke(clid, reason)
+                else:
+                    self.clientPoke(clids.pop(), reason)
 
 
     def clientPoke(self, clid, message):
         print("Poking client {0}...\nMessage: {1}".format(clid, message))
-        response = self.client.write("clientpoke clid=" + str(clid) + " msg=" + str(message.replace(" ", "\s")))
+        response = self.client.write("clientpoke " + str(clid) + " msg=" + str(message.replace(" ", "\s")))
         if response != None:
             print("Done!\n")
         else:
