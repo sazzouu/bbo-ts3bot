@@ -16,19 +16,19 @@ class Telnet:
             print("Connecting to {0} on port {1}...".format(self.host, self.port))
             try:
                 self.connection = telnetlib.Telnet(self.host, self.port)
-                self.read_all()
+                self.__read_all()
                 print("Success!\n")
             except:
                 print("Connection could not be established!\nShutting down...")
 
-    def read_all(self):
+    def __read_all(self):
         res = self.connection.read_until(b"\n\r", 1)
         if(res != b''):
             self.result.append(res.decode().split("\n\r")[0])
-            self.read_all()
+            self.__read_all()
 
-    def failed(self):
-        self.read_all()
+    def __failed(self):
+        self.__read_all()
         self.error = self.result.pop().split(" ")
         err_code = int(self.error[1].split("=").pop())
         self.error = err_code != 0
@@ -56,6 +56,6 @@ class Telnet:
     def write(self, command):
         self.result = []
         self.connection.write(str.encode(command + "\n"))
-        self.failed()
+        self.__failed()
         return self.result
 

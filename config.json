@@ -5,17 +5,17 @@
   "query_port": 10011,
   "server_settings_override": true,
   "server_settings":{
-    "virtualserver_name": "Burtzelbude Oberfranken",
-    "virtualserver_maxclients": 30
+    "virtualserver_name": "Burtzelbude Oberfgdfgdfranken",
+    "virtualserver_maxclients": 12
   },
-  "bot_name": "[BBO] Query Bot",
-  "bot_join_message": "BBO-Bot in da house!",
+  "bot_name": "[BBO] Query Bot 2.0",
+  "bot_join_message": "BBO-Bot in da house, bitch!",
   "use_afk": true,
   "afk_cid": 2,
   "max_idle_time": 5000,
   "afk_move_message": "You have been AFK for too long!",
-  "afk_immune_cids": [1, 3],
-  "use_online_spacer": false,
+  "afk_immune_cids": [3],
+  "use_online_spacer": true,
   "online_spacer_cid": 1,
   "online_spacer_label": "[cspacer] {0} User(s) online"
 }

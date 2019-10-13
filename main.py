@@ -18,7 +18,7 @@ with open("./config.json", "r") as file:
         bot.editServer(new_info)
 
     while(True):
-        if bot.client.error == 1024:
+        if bot.getError()['code'] == 1024:
             print("Connection seems to be lost...")
             break
         else:
@@ -41,6 +41,7 @@ with open("./config.json", "r") as file:
             if config['use_online_spacer']:
                 if bot.clientCountChanged():
                     cfg = {
-                        'channel_name': config['online_spacer_label'].format(bot.ccount),
+                        'channel_name': config['online_spacer_label'].format(bot.getClientCount()),
                     }
                     bot.editChannel(config['online_spacer_cid'], cfg)
+
