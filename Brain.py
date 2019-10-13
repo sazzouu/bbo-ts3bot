@@ -104,6 +104,19 @@ class Bot:
         if response != None:
             print("Done!\n")
 
+    def clientServerGroups(self, cdbid):
+        response = self.__client.write("servergroupsbyclientid cldbid=" + str(cdbid))
+        response = response.split("|")
+        groups = []
+        for i in range(0, len(response)):
+            group = {}
+            for item in response[i].split(" "):
+                item = item.replace("\\s", " ").split("=")
+                group[item[0]] = item[1]
+            groups.append(group)
+        print(groups)
+        return groups
+
     def setName(self, name):
         print("Setting bot-name...")
         name = name.replace(" ", "\s")

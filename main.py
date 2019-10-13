@@ -24,15 +24,18 @@ with open("./config.json", "r") as file:
         else:
             if config['use_afk']:
                 afks = bot.afkClients()
-                afk_ids = None
+                afk_ids = ""
                 for afk in afks:
                     if int(afk['client_database_id']) != 1:
                         if(int(afk['cid']) != config['afk_cid'] and not int(afk['cid']) in config['afk_immune_cids']):
                             if int(afk['client_idle_time']) > config['max_idle_time']:
-                                if afk_ids == None:
-                                    afk_ids = ""
+                                temp = "clid=" + afk['clid'] + "|"
 
-                                afk_ids += "clid=" + afk['clid'] + "|"
+                                for group in bot.clientServerGroups(afk['client_database_id']):
+                                    if int(group['sgid']) in config['afk_immune_gids']:
+                                        temp = ""
+
+                                afk_ids += temp
 
                 if afk_ids != None:
                     afk_ids = afk_ids[:-1]

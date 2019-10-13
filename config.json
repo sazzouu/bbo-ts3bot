@@ -15,6 +15,7 @@
   "max_idle_time": 10000,
   "afk_move_message": "You have been AFK for too long!",
   "afk_immune_cids": [3, 4],
+  "afk_immune_gids": [9],
   "use_online_spacer": false,
   "online_spacer_cid": 1,
   "online_spacer_label": "[cspacer] {0} User(s) online"
