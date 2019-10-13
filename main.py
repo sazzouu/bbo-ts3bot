@@ -44,4 +44,3 @@ with open("./config.json", "r") as file:
                         'channel_name': config['online_spacer_label'].format(bot.getClientCount()),
                     }
                     bot.editChannel(config['online_spacer_cid'], cfg)
-

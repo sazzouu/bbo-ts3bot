@@ -1,16 +1,15 @@
-from Socket import Telnet
+from Socket import TClient
 
 class Bot:
     def __init__(self, name, password, ip="localhost", port=10011):
         print("Setting up TS3-Bot...")
-        self.__client = Telnet(ip, port)
-        self.__client.connect()
+        self.__client = TClient(ip, port)
         self.__ccount = 0
         self.__login(name, password)
 
     def __login(self, user, password):
         result = self.__client.write("login {0} {1}".format(user, password))
-        if not self.__client.error:
+        if self.__client.error['code'] == 0:
             print("Successfully logged in!")
             self.__use(self.serverList()['virtualserver_id'])
         else:
@@ -25,11 +24,7 @@ class Bot:
             print("Connection to virtual server could not be established!")
 
     def getError(self):
-        temp = {
-            'code': self.__client.error,
-            'message': self.__client.error_msg
-        }
-        return temp
+        return self.__client.error
 
     def getClientCount(self):
         return self.__ccount
@@ -44,19 +39,18 @@ class Bot:
             print("Success!\n")
 
     def commandHelp(self, command):
-        self.__client.write("help " + command)
-        print(self.__client.result)
+        print(self.__client.write("help " + command))
 
     def serverInfo(self):
-        self.__client.write("serverinfo")
-        self.__client.result = self.__client.result.split(" ")
+        result = self.__client.write("serverinfo")
+        result = result.split(" ")
         json = {}
-        for i in range(0,len(self.__client.result)):
-            self.__client.result[i] = self.__client.result[i].split("=", 1)
-            if len(self.__client.result[i]) == 2:
-                json[self.__client.result[i][0]] = self.__client.result[i][1].replace("\\s", " ")
-        self.__client.result = json
-        return self.__client.result
+        for i in range(0,len(result)):
+            result[i] = result[i].split("=", 1)
+            if len(result[i]) == 2:
+                json[result[i][0]] = result[i][1].replace("\\s", " ")
+        result = json
+        return result
 
     def serverList(self):
         list = self.__client.write("serverlist").split(" ")
