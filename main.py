@@ -6,7 +6,6 @@ with open("./config.json", "r") as file:
 
     bot = Client(config['query_name'], config['query_password'], config['query_address'], config['query_port'])
     bot.setName(config['bot_name'])
-    bot.globalMessage(config['bot_join_message'])
     if config['server_settings_override']:
         cur_info = bot.serverInfo()
         new_info = {}
@@ -37,7 +36,7 @@ with open("./config.json", "r") as file:
 
                                 afk_ids += temp
 
-                if afk_ids != None:
+                if afk_ids != "":
                     afk_ids = afk_ids[:-1]
                     bot.clientMove(afk_ids, config['afk_cid'], config['afk_move_message'])
 

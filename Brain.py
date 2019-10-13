@@ -11,11 +11,11 @@ class Bot:
         result = self.__client.write("login {0} {1}".format(user, password))
         if self.__client.error['code'] == 0:
             print("Successfully logged in!")
-            self.__use(self.serverList()['virtualserver_id'])
+            self.__use()
         else:
             print("Failed to connect to server!")
 
-    def __use(self, sid):
+    def __use(self, sid=1):
         print("Loggin into virtual server...")
         response = self.__client.write("use sid=" + str(sid))
         if response != None:
@@ -29,18 +29,6 @@ class Bot:
     def getClientCount(self):
         return self.__ccount
 
-    def globalMessage(self, text="Hello World!"):
-        print("Sending global message: " + text + "...")
-        text = text.replace(" ", "\s")
-        result = self.__client.write("gm msg=" + text)
-        if result == None:
-            print("Failed!\n")
-        else:
-            print("Success!\n")
-
-    def commandHelp(self, command):
-        print(self.__client.write("help " + command))
-
     def serverInfo(self):
         result = self.__client.write("serverinfo")
         result = result.split(" ")
@@ -51,15 +39,6 @@ class Bot:
                 json[result[i][0]] = result[i][1].replace("\\s", " ")
         result = json
         return result
-
-    def serverList(self):
-        list = self.__client.write("serverlist").split(" ")
-        if list != None:
-            jsonList = {}
-            for i in range(0, len(list) - 1):
-                temp = list[i].split("=")
-                jsonList[temp[0]] = temp[1]
-            return jsonList
 
     def editServer(self, new_config):
         params = ""

@@ -1,5 +1,4 @@
 import telnetlib
-import sys
 
 class TClient:
     def __init__(self, ip, port):
@@ -38,7 +37,7 @@ class TClient:
                 print("Success!\n")
 
     def __read_all(self):
-        res = self.__connection.read_until(b"\n\r", 1)
+        res = self.__connection.read_until(b"\n\r", 0.25)
         if(res != b''):
             self.__result.append(res.decode().split("\n\r")[0])
             self.__read_all()
@@ -64,4 +63,3 @@ class TClient:
         self.__connection.write(str.encode(command + "\n"))
         self.__failed()
         return self.__result
-
