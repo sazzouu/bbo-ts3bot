@@ -6,7 +6,7 @@
   "server_settings_override": true,
   "server_settings":{
     "virtualserver_name": "Burtzelbude Oberfranken2.1",
-    "virtualserver_maxclients": 12
+    "virtualserver_maxclients": 14
   },
   "bot_name": "[BBO] Query Bot 2.1",
   "use_afk": true,

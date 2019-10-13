@@ -13,6 +13,7 @@ class TClient:
             "0": "Success!",
             "256": "Command not found!",
             "512": "Invlalid Client-ID!",
+            "513": "Nickname already in use!",
             "516": "Invalid client type... check your permissions!",
             "768": "Invalid Channel-ID!",
             "771": "Channelname already in use!",
@@ -37,7 +38,7 @@ class TClient:
                 print("Success!\n")
 
     def __read_all(self):
-        res = self.__connection.read_until(b"\n\r", 0.25)
+        res = self.__connection.read_until(b"\n\r", 1)
         if(res != b''):
             self.__result.append(res.decode().split("\n\r")[0])
             self.__read_all()
@@ -62,4 +63,4 @@ class TClient:
         self.__result = []
         self.__connection.write(str.encode(command + "\n"))
         self.__failed()
-        return self.__result
+        return self.__result#
