@@ -5,10 +5,10 @@
   "query_port": 10011,
   "server_settings_override": true,
   "server_settings":{
-    "virtualserver_name": "Burtzelbude Oberfranken2.1",
-    "virtualserver_maxclients": 14
+    "virtualserver_name": "Burtzelbude Oberfranken2.5",
+    "virtualserver_maxclients": 32
   },
-  "bot_name": "[BBO] Query Bot 2.1",
+  "bot_name": "[BBO] Query Bot 2.5",
   "use_afk": true,
   "afk_cid": 2,
   "max_idle_time": 5000,

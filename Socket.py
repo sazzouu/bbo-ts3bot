@@ -31,17 +31,18 @@ class TClient:
             print("Connecting to {0} on port {1}...".format(ip, port))
             try:
                 self.__connection = telnetlib.Telnet(ip, port)
-                self.__read_all()
             except:
                 print("Connection could not be established!\nShutting down...")
             else:
                 print("Success!\n")
 
     def __read_all(self):
-        res = self.__connection.read_until(b"\n\r", 1)
-        if(res != b''):
-            self.__result.append(res.decode().split("\n\r")[0])
+        self.__result = self.__connection.read_very_eager().decode().split("\n\r")
+        if(self.__result == ['']):
             self.__read_all()
+        else:
+            self.__result.pop()
+
 
     def __failed(self):
         self.__read_all()
