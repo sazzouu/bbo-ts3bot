@@ -29,6 +29,20 @@ class Bot:
     def getClientCount(self):
         return self.__ccount
 
+    def getChannels(self):
+        channels = []
+
+        result = self.__client.write("channellist").split("|")
+        for i in range(0, len(result)):
+            result[i] = result[i].split(" ")
+            json = {}
+            for element in result[i]:
+                element = element.split("=")
+                json[element[0]] = element[1].replace("\\s", " ")
+            channels.append(json)
+
+        return channels
+
     def serverInfo(self):
         result = self.__client.write("serverinfo")
         result = result.split(" ")
@@ -93,7 +107,6 @@ class Bot:
                 item = item.replace("\\s", " ").split("=")
                 group[item[0]] = item[1]
             groups.append(group)
-        print(groups)
         return groups
 
     def setName(self, name):
@@ -108,6 +121,12 @@ class Bot:
         for key, value in new_config.items():
             params += key + "=" + str(value).replace(" ", "\s") + " "
         self.__client.write("channeledit cid=" + str(cid) + params)
+
+    def channelDelete(self, cid):
+        self.__client.write("channeldelete cid=" + cid)
+
+    def channelCreate(self, name, order):
+        self.__client.write("channelcreate channel_name={0} channel_order={1} channel_flag_permanent=1".format(name.replace(" ", "\s"), order))
 
     def clientCount(self):
         response = self.serverInfo()

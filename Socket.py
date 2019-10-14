@@ -1,4 +1,5 @@
 import telnetlib
+import time
 
 class TClient:
     def __init__(self, ip, port):
@@ -16,7 +17,9 @@ class TClient:
             "513": "Nickname already in use!",
             "516": "Invalid client type... check your permissions!",
             "768": "Invalid Channel-ID!",
+            "770": "No need to move!",
             "771": "Channelname already in use!",
+            "772": "Channel not empty!",
             "1024": "Not logged into a virtual server!",
             "1538": "Inavlid parameter!",
             "1539": "Parameters not set!",
@@ -25,6 +28,7 @@ class TClient:
         }
         print("Done!\n")
         self.__connect(ip, port)
+        time.sleep(5)
 
     def __connect(self, ip, port):
         if self.__connection == None:
@@ -39,6 +43,7 @@ class TClient:
     def __read_all(self):
         self.__result = self.__connection.read_very_eager().decode().split("\n\r")
         if(self.__result == ['']):
+            time.sleep(0.1)
             self.__read_all()
         else:
             self.__result.pop()

@@ -5,17 +5,25 @@
   "query_port": 10011,
   "server_settings_override": true,
   "server_settings":{
-    "virtualserver_name": "Burtzelbude Oberfranken2.5",
+    "virtualserver_name": "Burtzelbude Oberfranken",
     "virtualserver_maxclients": 32
   },
-  "bot_name": "[BBO] Query Bot 2.5",
-  "use_afk": true,
+  "bot_name": "[BBO] Query Bot",
+  "use_afk": false,
   "afk_cid": 2,
   "max_idle_time": 5000,
   "afk_move_message": "You have been AFK for too long!",
-  "afk_immune_cids": [3, 4],
-  "afk_immune_gids": [9],
+  "afk_immune_cids": [3, 427, 190, 459, 568, 567, 566, 497, 536, 527, 442, 461, 524, 554, 559],
+  "afk_immune_gids": [],
   "use_online_spacer": true,
   "online_spacer_cid": 1,
-  "online_spacer_label": "[cspacer] {0} User(s) online"
+  "online_spacer_label": "[cspacer] {0} User(s) online",
+  "use_auto_expands": true,
+  "auto_expands": [
+    {
+      "start_cid": "1",
+      "end_cid": "2",
+      "label": "[spacer]Labern {0}"
+    }
+  ]
 }
