@@ -86,9 +86,11 @@ class Bot:
                 clids = str(clid).split("|")
                 if len(clids) > 1:
                     for clid in clids:
-                        self.clientPoke(clid, reason)
+                        self.message(1, clid.split("=")[1], reason)
+                        #self.clientPoke(clid, reason)
                 else:
-                    self.clientPoke(clids.pop(), reason)
+                    self.message(1, clids.pop().split("=")[1], reason)
+                    #self.clientPoke(clids.pop(), reason)
 
 
     def clientPoke(self, clid, message):
@@ -140,3 +142,22 @@ class Bot:
             return True
         else:
             return False
+
+    def message(self, ttype, target, msg):
+        console_messages = {
+            1: {
+                "message": "client"
+            },
+            2: {
+                "message": "channel",
+            },
+            3: {
+                "virutal server"
+            }
+        }
+
+        if ttype in range(1,4):
+            print("Sending message to {0} with ID {1}: '{2}'".format(console_messages[ttype]["message"], target, msg))
+            self.__client.write("sendtextmessage targetmode={0} target={1} msg={2}".format(ttype, target, msg.replace(" ", "\s")))
+        else:
+            print("Wrong tragetmode for sending messages!\n")

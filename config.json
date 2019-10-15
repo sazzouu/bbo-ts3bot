@@ -9,7 +9,7 @@
     "virtualserver_maxclients": 32
   },
   "bot_name": "[BBO] Query Bot",
-  "use_afk": false,
+  "use_afk": true,
   "afk_cid": 2,
   "max_idle_time": 5000,
   "afk_move_message": "You have been AFK for too long!",
@@ -23,7 +23,7 @@
     {
       "start_cid": "1",
       "end_cid": "2",
-      "label": "[spacer]Labern {0}"
+      "label": "[spacer]\u25C6 Labern {0}"
     }
   ]
 }
