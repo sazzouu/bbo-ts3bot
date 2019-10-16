@@ -60,15 +60,15 @@ class Bot:
             params += key + "=" + str(value).replace(" ", "\s") + " "
         self.__client.write("serveredit " + params)
 
-    def afkClients(self):
-        response = self.__client.write("clientlist -times")
+    def getClients(self, params=""):
+        response = self.__client.write("clientlist {0}".format(params))
         if response != None:
             response = response.split("|")
             clients = []
             for clientstring in response:
                 jsonList = {}
                 client = clientstring.split(" ")
-                for i in range(0,len(client)):
+                for i in range(0, len(client)):
                     temp = client[i].split("=")
                     jsonList[temp[0]] = temp[1]
                 clients.append(jsonList)
@@ -87,10 +87,8 @@ class Bot:
                 if len(clids) > 1:
                     for clid in clids:
                         self.message(1, clid.split("=")[1], reason)
-                        #self.clientPoke(clid, reason)
                 else:
                     self.message(1, clids.pop().split("=")[1], reason)
-                    #self.clientPoke(clids.pop(), reason)
 
 
     def clientPoke(self, clid, message):
@@ -98,18 +96,6 @@ class Bot:
         response = self.__client.write("clientpoke " + str(clid) + " msg=" + str(message.replace(" ", "\s")))
         if response != None:
             print("Done!\n")
-
-    def clientServerGroups(self, cdbid):
-        response = self.__client.write("servergroupsbyclientid cldbid=" + str(cdbid))
-        response = response.split("|")
-        groups = []
-        for i in range(0, len(response)):
-            group = {}
-            for item in response[i].split(" "):
-                item = item.replace("\\s", " ").split("=")
-                group[item[0]] = item[1]
-            groups.append(group)
-        return groups
 
     def setName(self, name):
         print("Setting bot-name...")

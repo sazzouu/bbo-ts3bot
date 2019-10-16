@@ -25,5 +25,9 @@
       "end_cid": "2",
       "label": "[spacer]\u25C6 Labern {0}"
     }
-  ]
+  ],
+  "use_jailing": true,
+  "jail_move_message": "You've violated the server rules!",
+  "jailed_gid": 10,
+  "jail_cid": 248
 }

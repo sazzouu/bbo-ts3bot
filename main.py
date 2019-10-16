@@ -47,18 +47,33 @@ with open("./config.json", "r") as file:
             print("Connection seems to be lost...")
             break
         else:
+            if ['use_jailing']:
+                clients = bot.getClients("-groups")
+                clids = ""
+                for client in clients:
+                    for group in client['client_servergroups'].split(","):
+                        if int(group) == config['jailed_gid'] and int(client['cid']) != config['jail_cid']:
+                            clids += "clid={0}|".format(client['clid'])
+
+                if clids != "":
+                    clids = clids[:-1]
+                    bot.clientMove(clids, config['jail_cid'])
+                    for clid in clids.split("|"):
+                        bot.clientPoke(clid, config['jail_move_message'])
+
             if config['use_afk']:
-                afks = bot.afkClients()
+                afks = bot.getClients("-times -groups")
                 afk_ids = ""
                 for afk in afks:
                     if int(afk['client_database_id']) != 1:
-                        if(int(afk['cid']) != config['afk_cid'] and not int(afk['cid']) in config['afk_immune_cids']):
+                        if(int(afk['cid']) != config['afk_cid'] and not int(afk['cid']) in config['afk_immune_cids'] and not int(afk['cid']) == config['jail_cid']):
                             if int(afk['client_idle_time']) > config['max_idle_time']:
                                 temp = "clid=" + afk['clid'] + "|"
 
-                                for group in bot.clientServerGroups(afk['client_database_id']):
-                                    if int(group['sgid']) in config['afk_immune_gids']:
+                                for group in afk['client_servergroups'].split(","):
+                                    if int(group) in config['afk_immune_gids']:
                                         temp = ""
+                                        break
 
                                 afk_ids += temp
 
